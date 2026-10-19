@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ข้อสอบภาษาอังกฤษ</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#667;--bd:#dfe3ec;--pr:#3556d8;--ok:#1b9a4b;--okb:#e5f6ec;--no:#d33;--nob:#fde8e8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151c;--card:#1b2030;--tx:#e8ebf3;--mu:#9aa3b8;--bd:#2e3550;--pr:#7b95ff;--ok:#4cd98a;--okb:#143324;--no:#ff7b7b;--nob:#3a1b1b}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Sarabun","Noto Sans Thai",system-ui,sans-serif;line-height:1.5}
+.w{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:8px 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tab{flex:1;min-width:110px;padding:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;cursor:pointer;font:inherit}
+.tab.on{background:var(--pr);color:#fff;border-color:var(--pr)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin:12px 0}
+.pass{background:var(--card);border-left:4px solid var(--pr);padding:12px 14px;margin:16px 0 8px;border-radius:8px;white-space:pre-line;font-size:15px}
+.q{font-weight:600;margin-bottom:8px;white-space:pre-line}
+.o{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--bd);border-radius:9px;margin:6px 0;cursor:pointer}
+.o.sel{border-color:var(--pr);background:color-mix(in srgb,var(--pr) 12%,transparent)}
+.o.right{border-color:var(--ok);background:var(--okb)}
+.o.wrong{border-color:var(--no);background:var(--nob)}
+.o input{margin-top:5px}
+.btn{padding:12px 20px;border:0;border-radius:10px;background:var(--pr);color:#fff;font:inherit;font-weight:600;cursor:pointer;margin:6px 6px 6px 0}
+.btn.g{background:var(--card);color:var(--tx);border:1px solid var(--bd)}
+.score{font-size:40px;font-weight:700;color:var(--pr)}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pr)}
+table{width:100%;border-collapse:collapse}td,th{padding:6px;text-align:left;border-bottom:1px solid var(--bd)}
+.mu{color:var(--mu);font-size:14px}
+</style></head><body><div class="w">
+<h1>📝 ข้อสอบภาษาอังกฤษ (3 ชุด รวม 60 ข้อ)</h1>
+<div class="card"><div class="mu" id="prog"></div><div class="bar"><i id="pb" style="width:0"></i></div></div>
+<div class="tabs" id="tabs"></div>
+<div id="main"></div>
+<div id="sum"></div>
+</div>
+<script>
+const P={
+A:`Read the text below and answer questions 4-6.\n\nTo achieve our research objective, we extend the Unified Theory of Acceptance and Use of Technology (UTAUT2) with a quantitative approach. We collected data from a sample of 283 university students in the United Arab Emirates, employing a convenience sampling method. Our findings reveal significant impacts of students' trust, effort expectancy, performance expectancy, and hedonic motivation on their attitudes towards ChatGPT.`,
+B:`Read the text below and answer questions 7-8.\n\nWhy does UNESCO consider multilingual education and multilingualism so important?\n\nUNESCO has been promoting multilingual education as a means to improve learning and learning outcomes and give life to linguistic and cultural diversity since 1953 when a meeting of specialists in vernacular languages led to the Organization publishing the Use of Vernacular languages in education. Its position was strengthened in 1999 when the UNESCO General Conference adopted a resolution crystallizing the definition of ‘multilingual education’ as the use of at least three languages: the mother tongue(s), a regional or national language and an international language.`,
+C:`Read the text below and answer questions 9-10.\n\nThere is growing concern that future generations may lack social skills due to increased reliance on digital communication. Many young people prefer texting and social media over face-to-face interactions, potentially leading to weaker interpersonal abilities. This shift can impact their ability to build relationships, collaborate, and communicate effectively in real-world situations. Reliance on digital communication may lead future generations to lack essential social skills. To address this, educational institutions and parents should encourage more in-person interactions and emphasize the importance of social skills development.`,
+D:`Passage 1:\n\nMany students struggle to complete their university studies due to financial crises. The rising cost of tuition and living expenses forces some to take on part-time jobs, which can interfere with their academic performance. Others may face the difficult decision to take on significant debt or drop out altogether. Scholarships and financial aid are often insufficient to cover all expenses, exacerbating the problem. The financial strain can lead to increased stress and mental health among students, impacting their overall well-being and academic success. Addressing these financial barriers is crucial to ensuring students can successfully complete their education.`,
+E:`Passage 2:\n\nThere is growing concern that future generations may lack social skills due to increased reliance on digital communication. Many young people prefer texting and social media over face-to-face interactions, potentially leading to weaker interpersonal abilities. This shift can impact their ability to build relationships, collaborate, and communicate effectively in real-world situations. Reliance on digital communication may lead future generations to lack essential social skills. To address this, educational institutions and parents should encourage more in-person interactions and emphasize the importance of social skills development.`,
+F:`Passage 3:\n\nThe effect of online learning engagement improvement in a gamification environment using the Gamiplus application\n\nNitcha Chamniyon, Prakob Koraneekij, Jintavee Khlaisang\n\nAbstract\nThe purpose of this research was to study the effect of learning engagement in a gamification environment and learner satisfaction using the Gamiplus application. The sample was a total of 33 students of the Faculty of Education, Thonburi Rajabhat University, Thailand. The tools used in the experiment were the: (1) Self-assessment form for learning engagement; (2) Learning engagement rubric; (3) Gamiplus application; and (4) Questionnaire for satisfaction towards learning with Gamiplus. The self-assessment form had a reliability of .960. The learning engagement rubric had a positive statistically significant Pearson correlation coefficient at .05 (rxy = .982). Data were analyzed using the dependent t-test statistical analysis and one-way repeated measure ANOVA scores of the 1st, 3rd, and 5th trials. The results showed that: (1) the mean score of learning engagement from the self-assessment form after the experiment was statistically significantly higher than before the experiment at .05; and (2) the one-way repeated analysis of variance found that the mean score of learning engagement in each study was statistically significantly higher at .05, and the overall learners' satisfaction was at a high level (M = 4.45, SD = 0.71).\n\nKasetsart Journal of Social Sciences 44 (2023) 997–1006`};
+// [question, options, answerIndex, passageKey]
+const S=[
+{n:"ชุดที่ 1",q:[
+["A: Hi, Pang! ________________?\nB: Hi! Fine, thanks. How about you?",["Are you studying?","Not too bad.","How are things with you?","Same here!"],2],
+["A: I’m Ms. Kim, your new English teacher. Nice to meet you all.\nB: ____________",["Nice to meet you.","Good morning, teacher.","I’ll be teaching English every Monday.","Thank you."],0],
+["A: Who is absent today?\nB: ____________",["I haven't seen him today.","He is ill.","Jack is absent.","Someone went home."],2],
+["A: _________ about vegetables. Can you give me some examples?\nB: Carrot, Cucumber, ...",["Please don’t forget","Match the names","Today, we're going to learn","Let’s clean up"],2],
+["Match the pictures with the words. _________, I want you to write the words in the worksheet.",["Next","Last","After","First of all"],0],
+["Now, I’d like you to write one paragraph summarizing your main idea. _________",["Try again next time.","You can spend 10 minutes on this.","That’s the way to do it!","Please be quiet."],1],
+["_________. Your paragraph is clear and organized.",["Well done","Take it easy.","Not really.","Keep on trying."],0],
+["A school administrator who assists the principal in managing the day-to-day operations of a school",["Counselor","Vice principal","Janitor","Librarian"],1],
+["A person who helps the main teacher by supporting students, preparing materials, managing behavior, and working with small groups or individuals.",["Teaching assistant","School nurse","Instructor","Coach"],0],
+["The study of personal and public well-being, including physical and mental issues.",["Social studies","Development","Health","Mathematics"],2],
+["A subject focusing on creating items by hand using various materials and techniques.",["Craft","Guidance","Culture","Art history"],0],
+["Resources used for teaching or learning, such as books, handouts, or tools.",["Materials","Database","Proposal","Schedule"],0],
+["A task or work that the teacher gives students to do, either in class or at home.",["Activity","Instruction","Assignment","Test"],2],
+["To distribute something to a group of people.",["Take out","Come out","Give out","Act out"],2],
+["To carefully examine something to find mistakes or problems.",["Sing along","Put together","Repeat after","Check through"],3],
+["A conversation or exchange of ideas on a particular topic, often to deepen understanding.",["Discussion","Simulation","Performance","Presentation"],0],
+["A test or investigation carried out to discover or prove something.",["Experiment","Theory","Prediction","Gamification"],0],
+["To make a process easier or help something run more smoothly.",["Facilitate","Conduct","Monitor","Assess"],0],
+["To offer an idea or recommendation for consideration.",["Suggest","Observe","Evaluate","Prepare"],0],
+["The school _______ helped the students manage their stress and plan their academic goals.",["Technician","Counselor","Principal","Specialist"],1],
+["The _______ teacher introduced her students to classic novels that explored themes of love, loss, and identity.",["Literature","Economics","Physical Education","Geography"],0],
+["The children's book was filled with beautiful _______ that brought the story to life on every page.",["Illustration","Diagram","Worksheet","Handout"],0],
+["The students worked as a team to _______ a presentation for the science fair.",["Put together","Check in","Come up","Take part"],0],
+["The teacher gave a clear _______ of the experiment before asking the students to try it themselves.",["Discussion","Reflection","Demonstration","Observation"],2],
+["The professor will _______ each student’s project based on creativity, research, and presentation skills.",["Evaluate","Improve","Assign","Conduct"],0]
+]},
+{n:"ชุดที่ 2",q:[
+["_________ section details how the research was conducted",["Discussion","Objectives","Method","Appendices"],2],
+["_________ section interprets the results and explain their implications",["Conclusion","Literature Review","Acknowledgment","Discussion"],3],
+["_________ section lists all the sources cited in the article",["Appendices","Acknowledgment","References","Objectives"],2],
+["What research method was employed in this study?",["convenience sampling method","quantitative approach","qualitative approach","experimental design"],1,"A"],
+["Which variable is NOT relevant in this study?",["motivation","trust","attitude","skills"],3,"A"],
+["What can be implied from this text?",["UTAUT2 is a good research tool.","Four factors were found to have a significant impact on attitudes.","The research objectives are achieved.","The authors extended the original model."],1,"A"],
+["When did UNESCO start promoting multilingual education?",["2024","1999","2030","1953"],3,"B"],
+["What is the minimum number of languages required for multilingual education?",["one","two","three","four"],2,"B"],
+["What should be the topic of the passage?",["The benefits of social media for communication","The history of digital communication tools","How technology improves collaboration and teamwork","The impact of digital communication on future generations' social skills"],3,"C"],
+["What is the main idea of the passage?",["Social media is the best way to build relationships and collaborate with others.","Digital communication will completely replace face-to-face communication in the future.","Over reliance on digital communication may harm social skills, so parents and schools should promote in-person interactions.","Future generations will prefer texting over real-life interaction, which will make them more creative."],2,"C"],
+["When you give a presentation, you should consider your _________ (e.g. experts, other academics and researchers with similar interests).",["audiences","peers","ideas","topics"],0],
+["_________ such as graphs, charts, images, should be used to support key points.",["Slides","Details","Evidences","Visuals"],3],
+["First, let me briefly _________ myself. My name is...",["share","greet","present","introduce"],3],
+["Now, I’ll pass you over to my _________. He is going to talk about...",["colleague","slide","next point","example"],0],
+["_________ makes the whole presentation sound more professional and well-organized.",["Conclusion","Transition","Introduction","Reference"],1],
+["I’d now like to _________ to the next part.",["expand on","move on","look at","go back"],1],
+["_______________ , I’d like to stop here. Thank you for your attention.",["I’d like to conclude by","I’d like to expand on","If there are no further questions","Let me go back"],2],
+["A teaching _________ is required for an elementary teacher position at this school.",["scholarship","publication","license","award"],2],
+["A master’s degree is often a required _________ for teaching at a university.",["qualification","recognition","institution","reference"],0],
+["The recruiter was impressed by his _________ CV and called him for an interview.",["outstanding","Relevant","Assistant","Administrative"],0],
+["He gained valuable experience during his _________ at a local primary school.",["education","internship","certificate","competition"],1],
+["What section does this information belong to?\n\nAwarded “Best Student Teacher” during internship (2024)",["Work experience","Achievements","Education","Skills"],1],
+["What section does this information belong to?\n\nFaculty Merit Scholarship for Academic Excellence, 2022",["Personal Information","Work experience","Education","Skills"],2],
+["What section does this information belong to?\n\nManaged a classroom of 25 students, focusing on positive behavior management",["Personal Information","Work experience","Education","Skills"],1],
+["What section does this information belong to?\n\nPresentation tools (PowerPoint, Canva, Prezi)",["Personal Information","Work experience","Education","Skills"],3]
+]},
+{n:"Practice Set 3",q:[
+["What is the main issue discussed in the passage?",["The benefits of part-time jobs for students","Financial challenges that make it difficult for students to complete university","The importance of scholarships in higher education","Ways universities reduce tuition fees"],1,"D"],
+["Why do some students take part-time jobs?",["To help pay tuition and living expenses","To improve their academic skills","To gain work experience","To meet new friends"],0,"D"],
+["What is one possible effect of financial strain on students?",["Better academic performance","Less interest in education","More scholarship opportunities","Increased stress and mental health issues"],3,"D"],
+["Why are some people concerned about young people's communication habits?",["They spend too much time studying","They rely more on digital communication than face-to-face interaction","They prefer traditional communication methods","They avoid using technology"],1,"E"],
+["What can be inferred from the passage about developing social skills?",["Social skills will develop naturally through texting","Digital communication should be completely banned","Schools and parents play an important role in encouraging face-to-face communication","Social skills are no longer necessary in modern society"],2,"E"],
+["What is the main purpose of the study?",["To compare online learning platforms used in Thailand","To examine learning engagement and satisfaction using the Gamiplus application in a gamified environment","To develop a new gamification application","To train teachers to use games"],1,"F"],
+["How many students participated in the research sample?",["23 students","30 students","33 students","53 students"],2,"F"],
+["Which of the following was NOT listed as a research instrument in the study?",["Self-assessment form for learning engagement","Learning engagement rubric","Gamiplus application","Online discussion forum"],3,"F"],
+["What was the result of the comparison between learning engagement before and after the experiment?",["There was no difference between the scores","The scores decreased after the experiment","The scores were significantly higher after the experiment","The results were inconclusive"],2,"F"],
+["How did the learners rate their overall satisfaction with learning using Gamiplus?",["At a low level","At a moderate level","At a high level","Satisfaction was not measured"],2,"F"]
+]}];
+let cur=0;const ans=S.map(s=>Array(s.q.length).fill(null)),done=S.map(()=>false);
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function sc(i){return S[i].q.reduce((a,q,j)=>a+(ans[i][j]===q[2]?1:0),0)}
+function tabs(){$("tabs").innerHTML=S.map((s,i)=>`<button class="tab ${i==cur?'on':''}" onclick="cur=${i};draw()">${s.n}${done[i]?` ✓ ${sc(i)}/${s.q.length}`:''}</button>`).join("")}
+function draw(){
+tabs();const s=S[cur],d=done[cur];let h="",lp=null;
+if(d){const c=sc(cur),n=s.q.length;h+=`<div class="card"><div class="score">${c}/${n}</div><div class="mu">${Math.round(c/n*100)}% — ${s.n}</div></div>`}
+s.q.forEach((q,j)=>{
+ if(q[3]&&q[3]!==lp)h+=`<div class="pass">${esc(P[q[3]])}</div>`;lp=q[3]||null;
+ h+=`<div class="card"><div class="q">${j+1}. ${esc(q[0])}</div>`;
+ q[1].forEach((o,k)=>{let c="o";if(d){if(k===q[2])c+=" right";else if(ans[cur][j]===k)c+=" wrong"}else if(ans[cur][j]===k)c+=" sel";
+  h+=`<label class="${c}"><input type="radio" name="q${j}" ${ans[cur][j]===k?'checked':''} ${d?'disabled':''} onchange="pick(${j},${k})"><span>${esc(o)}${d&&k===q[2]?' ✔':''}</span></label>`});
+ if(d&&ans[cur][j]===null)h+=`<div class="mu">ไม่ได้ตอบ</div>`;
+ h+=`</div>`});
+h+=d?`<button class="btn g" onclick="reset()">ทำชุดนี้ใหม่</button>`:`<button class="btn" onclick="submit()">ส่งคำตอบ ${s.n}</button>`;
+$("main").innerHTML=h;prog();summary()}
+function pick(j,k){ans[cur][j]=k;prog()}
+function prog(){const t=S.reduce((a,s)=>a+s.q.length,0),a=ans.flat().filter(x=>x!==null).length;$("prog").textContent=`ตอบแล้ว ${a}/${t} ข้อ`;$("pb").style.width=a/t*100+"%"}
+function submit(){const m=ans[cur].filter(x=>x===null).length;if(m&&!confirm(`ยังไม่ได้ตอบ ${m} ข้อ ต้องการส่งเลยหรือไม่?`))return;done[cur]=true;draw();scrollTo(0,0)}
+function reset(){ans[cur].fill(null);done[cur]=false;draw();scrollTo(0,0)}
+function summary(){
+ let tc=0,tn=0,rows="";S.forEach((s,i)=>{tn+=s.q.length;if(done[i]){tc+=sc(i)}rows+=`<tr><td>${s.n}</td><td>${done[i]?sc(i)+"/"+s.q.length:"– /"+s.q.length}</td><td>${done[i]?Math.round(sc(i)/s.q.length*100)+"%":"ยังไม่ส่ง"}</td></tr>`});
+ const dn=S.reduce((a,s,i)=>a+(done[i]?s.q.length:0),0);
+ $("sum").innerHTML=`<div class="card"><b>สรุปคะแนนรวม</b><table><tr><th>ชุด</th><th>คะแนน</th><th>%</th></tr>${rows}</table><p class="score">${tc}/${dn||tn}</p><div class="mu">${dn?Math.round(tc/dn*100)+"% ของชุดที่ส่งแล้ว":"ยังไม่ได้ส่งชุดใด"} (ข้อสอบทั้งหมด ${tn} ข้อ)</div></div>`}
+draw();
+</script></body></html>
